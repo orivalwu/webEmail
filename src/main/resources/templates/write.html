@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<form >
+    <div style="margin:25px 0;width: 80%" >
+        <input type="text"  class="form-control" id="receiver" placeholder="收件人">
+    </div>
+    <div style="margin-bottom:50px;width: 80% ">
+        <input type="text" class="form-control" id ="subject" placeholder="主题">
+    </div>
+    <div style="width: 80%">
+        <textarea  class="form-control" id ="content" style="height: 250px" placeholder="内容"></textarea>
+    </div>
+    <div>
+        <input type="button" class="btn btn-default" id="sendMsg" value="发送"/>
+    </div>
+</form>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <h3 id="desc"></h3>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+</body>
+<script>
+    $(function(){
+        $(document).on("click","#sendMsg",function () {
+            tos = $("#receiver").val();
+            var param ={
+                to:tos,
+                subject:$("#subject").val(),
+                content:$("#content").val()
+            };
+            cnt = 0; //统计tos中分号的个数，选择群发或是单发
+            for(id in tos){
+                if(tos[id]==';') cnt++;
+            }
+            cnt = parseInt(cnt);
+            if(cnt === 0){
+                $.ajax({
+                    type:"post",
+                    contentType:"application/json",
+                    url:"/send",
+                    data:JSON.stringify(param),
+                    success:function (msg) {
+                        $("#desc").text(msg);
+                        $("#myModal").modal("show");
+                    }
+                })
+            }else{
+                $.ajax({
+                    type:"post",
+                    contentType:"application/json",
+                    url:"/groupSend",
+                    data:JSON.stringify(param),
+                    success:function (msg) {
+                        $("#desc").text(msg);
+                        $("#myModal").modal("show");
+                    }
+                })
+            }
+        })
+
+    })
+
+
+</script>
+</html>

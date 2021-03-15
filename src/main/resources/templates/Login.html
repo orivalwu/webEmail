@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ邮件客户端</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body class="bg-light">
+<div style="margin-top: 100px">
+    <form method="post">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col text-center py-4 mt-2">
+                    <!--            <img class="img-fluid" src="img/mail.png" width="100" height="100" alt="Mail">-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <h4 class="text-muted font-weight-light mt-1">登录邮件客户端</h4>
+                </div>
+            </div>
+            <div class="row row-custom">
+                <div class="col">
+                    <div class="bg-white p-4 mt-3 border rounded">
+                        <form>
+                            <div class="form-group">
+                                <label for="name" class="text-dark">Username</label>
+                                <input type="text" class="form-control form-control-sm" id="name" placeholder="Enter username">
+                            </div>
+                            <div class="form-group">
+                                <label for="passwd" class="text-dark d-block">Password</label>
+                                <input type="password" class="form-control form-control-sm" id="passwd" placeholder="Password">
+                            </div>
+                            <button type="button" class="btn rounded-sm btn-primary-custom btn-block btn-sm text-white mt-4" id="login">登录</button>
+                            <div id="ans" style="text-align: center"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 row-custom">
+                <div class="col text-center">
+                    <div class="border py-3 rounded">
+                        <span>没有账号?</span>
+                        <a href="/register" id="reg">Create an account.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript">
+
+    $(function () {
+        $(document).on("click","#login",function () {
+            var paras ={
+                userName:$("#name").val(),
+                passWord:$("#passwd").val()
+            };
+            $.ajax({
+                type:"POST",
+                url:"/validate",
+                contentType:"application/json",
+                data:JSON.stringify(paras),
+                success:function (msg) {
+                    $("#ans").html("<p style='color: red'>msg</p>");
+                    if(msg === "登录成功"){
+                        window.open("./main","_self");
+                    }
+                }
+            })
+        })
+    });
+</script>
+</html>

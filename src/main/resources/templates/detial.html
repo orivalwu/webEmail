@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <p th:text="${item.getFrom()}"></p>
+    </div>
+    <div>
+        <p th:text="${item.getSubject()}"></p>
+    </div>
+    <div>
+        <p th:text="${item.getContent()}"></p>
+    </div>
+</div>
+
+</body>
+
+</html>

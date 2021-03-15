@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html" charset="UTF-8">
+    <title>注册界面</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet" >
+
+
+</head>
+<body>
+<div class="register">
+    <div class="well" style="height: 450px">
+        <div class="item"><h3>注册界面</h3></div>
+        <div class="item2">
+            <input type="text" class="form-control input-lg" id="username" placeholder="用户名"><br>
+            <input type="password" class="form-control input-lg" id="password" placeholder="密码"><br>
+            <input type="text" class="form-control input-lg" id="mailBox" placeholder="邮箱"><br>
+            <input type="text" class="form-control input-lg" id="authCode" placeholder="授权码">
+            <div id="Result"></div>
+            <input type="button" class="btn btn-primary" id="check" value="注册">
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/particle.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(document).on("click","#check",function () {
+            console.log($("#mailBox").val());
+            var param ={
+                userName : $("#username").val(),
+                passWord : $("#password").val(),
+                email:$("#mailBox").val(),
+                authCode: $("#authCode").val()
+            };
+            page = "/reg";
+            $.ajax({
+                url: page,
+                type:"post",
+                data: JSON.stringify(param),
+                contentType:"application/json",
+                success: function (msg) {
+                    if (msg==="注册成功") {
+                        countTime();
+                    } else {
+                        $("#Result").html("<p style='color:red'>" + msg + "</p>");
+                    }
+                }
+            });
+        });
+    });
+    function countTime() {
+        var seconds = 3;
+        $("#Result").html(seconds+"秒后到主界面");
+        setInterval(function () {
+            seconds--;
+            $("#Result").html(seconds+"秒后到主界面");
+            if(seconds===0){
+                $("#Result").hide();
+                window.location="/login";
+            }
+        },1000);
+    }
+
+</script>
+
+</body>
+</html>

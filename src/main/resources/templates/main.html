@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Java Mail Box</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom styling plus plugins -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/icheck/flat/green.css" rel="stylesheet">
+
+
+    <script src="js/jquery.min.js"></script>
+
+
+    <![endif]-->
+
+
+</head>
+
+
+<body class="nav-md">
+
+<div class="container body">
+
+
+    <div class="main_container">
+
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="main.html" class="site_title"><i class="fa fa-paw"></i>
+                        <span>Java Mail Box</span></a>
+                </div>
+                <div class="clearfix"></div>
+
+                <!-- menu prile quick info -->
+                <div class="profile">
+                    <div class="profile_info">
+                        <span>欢迎</span>
+                        <h2 th:text="${session.user.getUserName()}"></h2>
+                    </div>
+                </div>
+                <!-- /menu prile quick info -->
+
+                <!-- sidebar menu -->
+
+                <div id="sidebar-menu" class="main_menu_side">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+                            <li><a><i class="fa fa-home"></i> </a></li>
+                            <li><a></a></li>
+                            <li ><a id="read"><i class="fa fa-edit"></i> 收信 </a></li>
+                            <li><a id="write"><i class="fa fa-edit"></i> 写信 <span></span></a></li>
+                            <li><a><i class="fa fa-desktop"></i> 通信录 <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li>Durant</li>
+                                    <li>Stimps</li>
+                                    <li>Libors</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="设置">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>  <a data-toggle="tooltip" data-placement="top" title="锁定"> <span
+                        class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a> <a data-toggle="tooltip" data-placement="top" title="注销">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+
+            <div class="nav_menu">
+                <nav class="" role="navigation">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class=""><a href="javascript:;"
+                                        class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false" th:text="${session.user.getUserName()}"> <span
+                                class=" fa fa-angle-down"></span>
+                        </a>
+                            <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                                <li><a href="javascript:;"> 主页</a></li>
+                                <li><a href="javascript:;"> <span>设置</span></a></li>
+                                <li><a href="/login"><i class="fa fa-sign-out pull-right"></i> 注销</a></li>
+                            </ul></li>
+
+                        <li role="presentation" class="dropdown"> <i class="fa fa-envelope-o"></i></li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main" id="main">
+            <div class="">
+
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>
+                            Mail Inbox
+                        </h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div
+                                class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       placeholder="Search for..." id="queryContent"> <span
+                                    class="input-group-btn" >
+										<button class="btn btn-default" type="button" id="query">Go!</button>
+									</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="x_content" id="substance">
+<!--                    需要动态添加的地方-->
+
+<!--                    到这里截止-->
+                </div>
+<!--                分页-->
+                <nav id="navigator">
+                <ul class="pager">
+                    <li><span id="now">1</span>/<span id="total">1</span></li>
+                    <li><a href="#" id="pre">上一页</a> </li>
+                    <li><a href="#" id="next">下一页</a></li>
+                </ul>
+            </nav>
+                <div id="info"></div>
+            </div>
+
+            <!-- footer content -->
+            <footer >
+                <div class="">
+                    <p style="text-align: center">
+                         <a>Designed by Wzh</a>.
+                        | <span class="lead"> <i class="fa fa-paw"></i> Java Mail
+								Box!
+							</span>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+        <!-- /page content -->
+    </div>
+
+</div>
+
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix"
+        data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
+
+<!--模态窗体-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismass="modal" class="close" type="button"><span aria-hidden="true"> </span>
+                <span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <h2 style="color: red">超出范围</h2>
+            </div>
+            <div class="modal-footer">
+                <button data-dismass="modal" class="btn btn-default" type="button" id="btn-modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- chart js -->
+<script  type="text/javascript" src="js/nicescroll/jquery.nicescroll.min.js"></script>
+<!-- icheck -->
+<script type="text/javascript" src="js/icheck/icheck.min.js"></script>
+<!-- pace -->
+<script type="text/javascript" src="js/pace/pace.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript">
+    //查看邮件内容
+    $(function(){
+        $("#btn-modal").click(function () {
+           $("#myModal").modal("hide");
+        });
+
+        function showModal(){
+            $("#myModal").modal("show");
+        }
+
+        function Init(){
+            $.ajax({
+                url: "/read",
+                type: "get",
+                success: function (msg) {
+                    $("#total").text(Math.ceil(msg.length / 8));
+                    $("#now").text("1");
+                    var content = "";
+                    for (var i = 0; i < 7; i++) {
+                        var temp = '<div class="row">' +
+                            '<div class="col-lg-8 mail_list_column">' +
+                            '<div class="mail_list"><div>' +
+                            '<span><h2>&lt;' + msg[i].from + '&gt;</h2></span>' +
+                            '<span>' + msg[i].subject + '</span>' +
+                            '<span><small>' + msg[i].sentDate + '</small>&nbsp;&nbsp;&nbsp;<a href="/getContent/'+msg[i].id+'">参看内容</a></span></div></div></div></div>';
+                        content += temp;
+                    }
+                    $("#substance").html(content);
+                }
+            });
+        }
+
+        // 页面加载的时候要执行的函数
+        $(document).ready(
+            Init(),
+            $("a").click(function () {
+                var id=$(this).val();
+                content="";
+                $.ajax({
+                    type:"post",
+                    url:"getContent/"+id,
+                    success:function (msg) {
+                        content+='<div><h3>'+msg.subject+'</h3>'+
+                            '<small>'+msg.sendDate+'</small></div>'+
+                            '<div style="margin-top: 50px 0">' +
+                            '<p>'+msg.content+'</p></div>';
+                        $("#navigator").remove();
+                        $("#substance").html(content);
+                    }
+                })
+            })
+        );
+
+
+
+        $("#pre").click(function(){
+               num = parseInt($("#now").text());
+               if(num === 1){
+                    showModal();
+               }else{
+                   num = num -1;
+                   $("#now").text(num);
+                   var content = "";
+                   $.ajax({
+                       url:"/rread/"+num,
+                       type: "post",
+                       success:function (msg) {
+                            for(i in msg){
+                                var temp = '<div class="row">' +
+                                    '<div class="col-lg-8 mail_list_column">' +
+                                    '<div class="mail_list"><div>' +
+                                    '<span><h2>&lt;' + msg[i].from + '&gt;</h2></span>' +
+                                    '<span>' + msg[i].subject + '</span>' +
+                                    '<span><small>' + msg[i].sentDate + '</small>&nbsp;&nbsp;&nbsp;<a href="/getContent/'+msg[i].id+'">参看内容</a></span></div></div></div></div>';
+                                content += temp;
+                            }
+                           $("#substance").html(content);
+                       }
+                   });
+
+               }
+        });
+
+        $("#next").click(function(){
+                nowIndex = $("#now").text();
+                num = parseInt(nowIndex);
+                if(num === parseInt($("#total").text())) {
+                    showModal();
+                }else{
+                    num += 1;
+                    $("#now").text(num);
+                    var content = "";
+                    $.ajax({
+                        url:"/rread/"+num,
+                        type: "post",
+                        success:function (msg) {
+                            for(i in msg){
+                                var temp = '<div class="row">' +
+                                    '<div class="col-lg-8 mail_list_column">' +
+                                    '<div class="mail_list"><div>' +
+                                    '<span><h2>&lt;' + msg[i].from + '&gt;</h2></span>' +
+                                    '<span>' + msg[i].subject + '</span>' +
+                                    '<span><small>' + msg[i].sentDate + '</small>&nbsp;&nbsp;&nbsp;<a href="/getContent/'+msg[i].id+'">参看内容</a></span></div></div></div></div>';
+                                content += temp;
+                            }
+                            $("#substance").html(content);
+                        }
+                    });
+                }
+        });
+
+        //点击收件箱按钮时加载的方法
+        $(document).on("click","#read",function () {
+                location.reload(); //刷新页面
+        });
+
+
+        //写信的界面
+        $(document).on("click","#write",function(){
+            $("#main").html("<iframe src='/write' style='border: 0 ;width: 100%; height: 500px'></iframe>");
+        });
+
+        //查询的操作
+        $(document).on("click","#query",function () {
+            var queryContent = $("#queryContent").val();
+            if(queryContent===null){
+                console.log("请输入查询内容")
+            }else{
+                data = queryContent;
+                var content = "";
+                $.ajax({
+                    type:"post",
+                    url:"/query/"+data,
+                    success:function (msg) {
+                        for(i in msg){
+                            var temp = '<div class="row">' +
+                                '<div class="col-lg-8 mail_list_column">' +
+                                '<div class="mail_list"><div>' +
+                                '<span><h2>&lt;' + msg[i].from + '&gt;</h2></span>' +
+                                '<span>' + msg[i].subject + '</span>' +
+                                '<span><small>' + msg[i].sentDate + '</small>&nbsp;&nbsp;&nbsp;<a href="/getContent/'+msg[i].id+'">参看内容</a></span></div></div></div></div>';
+                            content += temp;
+                        }
+                        $("#navigator").remove();
+                        $("#substance").html(content);
+                    }
+                })
+            }
+        })
+    })
+</script>
+
+</body>
+</html>
